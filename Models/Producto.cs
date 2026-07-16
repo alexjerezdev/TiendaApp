@@ -1,0 +1,23 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TiendaApp.Models;
+
+// RECOMENDACIÓN SOLID: Una clase debe tener una sola responsabilidad (SRP)
+public class Producto
+{
+ public int Id { get; set; }
+
+ [Required(ErrorMessage = "El nombre es obligatorio")]
+ [StringLength(100)]
+ public string Nombre { get; set; } = string.Empty;
+
+ [Range(0.01, 10000, ErrorMessage = "El precio debe ser mayor a cero")]
+ public decimal Precio { get; set; } // ODS 8: Uso de decimal
+
+ public int Stock { get; set; }
+
+ [DataType(DataType.Date)]
+ [Column(TypeName = "timestamp without time zone")]
+public DateTime FechaVencimiento { get; set; }
+} 
