@@ -6,8 +6,10 @@ namespace TiendaApp.Controllers;
 public class ProductosController : Controller
 {
 private readonly ApplicationDbContext _context;
-// INYECCIÓN DE DEPENDENCIAS (DIP de SOLID): No instanciamos el contexto, lo recibimos.
-public ProductosController(ApplicationDbContext context) => _context = context;
+// INYECCIÓN DE DEPENDENCIAS (DIP de SOLID): 
+// No instanciamos el contexto, lo recibimos.
+public ProductosController(ApplicationDbContext context) 
+=> _context = context;
 // READ: Obtener lista (Usamos Async para escalabilidad)
 public async Task<IActionResult> Index()
 {
@@ -105,5 +107,15 @@ public async Task<IActionResult> DeleteConfirmed(int id)
     }
 
     return RedirectToAction(nameof(Index));
+}
+
+// RUTA SEO
+[HttpGet("/promociones-del-mes/barrio-norte")]
+public IActionResult OfertasEspeciales()
+{
+    ViewData["Message"] =
+        "Ofertas exclusivas para los vecinos del barrio.";
+
+    return View();
 }
 }
